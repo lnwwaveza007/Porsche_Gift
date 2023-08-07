@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Messager</title>
+  <style>
+    body {
+      background: black;
+    }
+
+    span {
+      color: #0f0;
+      font-family: monospace;
+      font-size: large;
+    }
+
+    .blinker {
+      opacity: 1;
+      margin-bottom: -2px;
+      height: 15px;
+      margin-left: -5px;
+      border-left: 7px solid rgb(255, 255, 255);
+      animation: blinker 0.9s steps(2, start) infinite;
+    }
+
+    @keyframes blinker {
+      to { 
+        visibility: hidden; 
+      }
+    }
+  </style>
+</head>
+<body>
+  <span id="AboutDevTypeText" class="typeing"></span>
+
+  <script>
+    var data = [
+      {
+        AboutDevTypeText: "<span>Wave sign in!<br><br>Wave : โหล โหลๆ พอร์ช อยู่ป่าว?<br><br>Wave : อยู่แหละ สวัสดีครับผม และ Happy Birthday ครับสุดหล่อ<br><br>Wave : สำหรับปีนี้ก็ปีแรกของการใช้ชีวิตในมหาวิทยาลัยเนอะ ยังไงก็ใช้ชีวิตให้คุ้มค่าครับ<br><br>Wave : มีอะไรก็ทักมาคุยกันได้ตลอดช่วยได้ทุกเรื่อง ขอให้มีความสุขมากๆ<br><br>Wave : คิดสิ่งใดขอให้สมปราถนา ไม่มีปัญหาอะไรมาให้กวนใจแล้วก็รวยๆ<br><br>Wave : แล้วก็ดูดิเห็นป่ะผมเป็นคนดีขนาดนี้ ทำไมกูยังไม่มีแฟนสักทีว่ะ 5555555 บ่นเฉยย<br><br>Wave : ยังไงก็มีความสุขมากๆนะครับ คุณพอร์ช!<br><br>Wave : Love you and write with love too!</span><br><br>Wave sign out!<br><br>. . . "
+      }
+    ];
+
+    var allElements = document.getElementsByClassName("typeing");
+    for (var j = 0; j < allElements.length; j++) {
+      var currentElementId = allElements[j].id;
+      var currentElementIdContent = data[0][currentElementId];
+      var element = document.getElementById(currentElementId);
+      var devTypeText = currentElementIdContent;
+
+      // type code
+      var i = 0, isTag, text;
+      (function type() {
+        text = devTypeText.slice(0, ++i);
+        if (text === devTypeText) return;
+        element.innerHTML = text + `<span class='blinker'>&#32;</span>`;
+        var char = text.slice(-1);
+        if (char === "<") isTag = true;
+        if (char === ">") isTag = false;
+        if (isTag) return type();
+        setTimeout(type, 60);
+      })();
+    }
+  </script>
+</body>
+</html>
